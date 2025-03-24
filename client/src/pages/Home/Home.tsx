@@ -2,11 +2,10 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import MyCard from "../../components/Card/Card";
 import "./Home.scss";
-import { Product } from "../../models/Product.model";
 import { fetchProducts } from "../../store/Products/ProductsAction";
 
+
 export default function Home() {
-  const [product, setProducts] = React.useState<Product[]>([]);
   const dispatch = useAppDispatch();
   const { products, loading } = useAppSelector((state) => state.product);
 
