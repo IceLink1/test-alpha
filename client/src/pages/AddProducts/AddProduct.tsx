@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import "./AddProduct.scss";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { createProduct } from "../../store/Products/ProductsAction";
 
 export default function AddProduct() {
@@ -14,19 +14,22 @@ export default function AddProduct() {
   );
   const dispatch = useAppDispatch();
 
+  const { loading } = useAppSelector((state) => state.product);
+
   const create = () => {
     if (title.trim() && description.trim() && price.trim()) {
       dispatch(createProduct({ title, description, price, image }));
       setTitle("");
       setDescription("");
       setPrice("");
-    }else{
-      alert("Заполните все поля!")
+    } else {
+      alert("Заполните все поля!");
     }
   };
 
   return (
     <div className="AddProduct">
+      {loading ? <h1>Loading...</h1> : "Добавление продукта"}
       <form>
         <TextField
           type="text"
